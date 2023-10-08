@@ -1,30 +1,27 @@
 import React, { ReactNode } from 'react';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
-import Login from './components/login/login';
-import Signup from './components/signup/signup';
-
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginSignup from './components/authentication/LoginSignup';
+import Homepage from './components/Homepage/Homepage';
+// import { CookiesProvider } from 'react-cookie';
 const App: React.FC = () => {
-  const LoginComp: ReactNode = <Login />;
-  const SignupComp: ReactNode = <Signup />;
-  return (
-    <Router>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/signup">Sign Up</Link>
-          </li>
-        </ul>
-      </nav>
+  const LoginSignupComp: ReactNode = <LoginSignup />;
+  const HomepageComp: ReactNode = <Homepage />;
 
+    return( 
+    <>
+      {/* <link>Authenticate</link> */}
+      <Router>
       <Routes>
-        <Route path="/login" element={LoginComp} />
-        <Route path="/signup" element={SignupComp} />
+        <Route path="/auth" element={LoginSignupComp} />
+        <Route path="/home" element={HomepageComp} />
+        {/* <Route path="/auth" element={LoginSignupComp} /> */}
       </Routes>
     </Router>
+    </>
   );
+
 };
 
 export default App;
+
+
