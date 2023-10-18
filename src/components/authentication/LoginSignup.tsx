@@ -1,14 +1,15 @@
 import React, { useState ,useEffect} from 'react';
 import { loginUser,signupUser } from '../../services/auth';
 import './LoginSignup.css';
-import { getCookieValue } from '../../utils/tokenUtils';
-import { Navigate } from 'react-router-dom';
+// import { getCookieValue } from '../../utils/tokenUtils';
+import { useNavigate } from 'react-router-dom';
 
 const LoginSignup: React.FC = () => {
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [age, setAge] = useState('');
+    const navigate=useNavigate();
 
     
     useEffect(() => {
@@ -32,10 +33,11 @@ const LoginSignup: React.FC = () => {
         if (success) {
             // setLoggedIn(true);
 
-            const Token=getCookieValue('token');
-            console.log(Token);
+            // const Token=getCookieValue('token');
+            // console.log(Token);
             console.log("Logged in");
-            return (<Navigate replace to="/home" />)
+            navigate('/profile');
+            
         } else {
             alert("Invalid Credentials");
         }
@@ -45,7 +47,7 @@ const LoginSignup: React.FC = () => {
         const success = await signupUser(userId, email, parseInt(age), password);
         if (success) {
             console.log("Signed Up");
-            return <Navigate replace to="/home" />
+            navigate('/profile');
         } else {
             alert("User already exists or Invalid credentials");
         }

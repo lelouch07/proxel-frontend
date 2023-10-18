@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { getCookieValue } from '../../utils/tokenUtils';
 
 const Profile = () => {
-    const [user, setUser] = useState({ UserID: '' , Email:'', Age:''});
+    const [user, setUser] = useState({ UserID: '', Email: '', Age: '' });
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const token = getCookieValue('token');
@@ -26,13 +28,15 @@ const Profile = () => {
             })
             .then(data => {
                 setUser(data.user);
-                setLoading(false); // Set loading to false after data is fetched
+                setLoading(false);
             })
             .catch(error => {
                 console.error(error);
-                // Handle the error or redirect the user to a login page if needed.
+
+                // Redirect to /auth if an error occurs
+                navigate('/auth');
             });
-    }, []);
+    }, [navigate]); // Include Navigate as a dependency to use it within the effect
 
     return (
         <div>
@@ -41,11 +45,15 @@ const Profile = () => {
             ) : user ? (
                 <div>
                     <h2>Hello, {user.UserID}</h2>
-                    <p>Email: {user.Email}</p>
+                    <h2>Email, {user.Email}</h2>
+                    <h2>Age, {user.Age}</h2>
+                    {/* <h2>Email, {user.UserID}</h2> */}
                     {/* Add more user information here */}
                 </div>
             ) : (
-                <p>No user data available</p>
+                // No user data, redirecting to /auth
+                // This could also be a user-friendly message
+                <p>Redirecting to authentication...</p>
             )}
         </div>
     );
