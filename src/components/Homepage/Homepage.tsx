@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import './Homepage.css';
-const Homepage:React.FC=()=>{
+import { Navigate } from 'react-router-dom';
+
+const Homepage: React.FC = () => {
+    const [user,setuser] = useState(true);
     console.log("Home Page");
-return (
-    <div>
-        <h1>Home Page</h1>
-    </div>
-)
+    const home=()=>{
+        setuser(!user);
+    }
+    return (
+        <div>
+            <h1>Home Page</h1>
+            {user ? null : <Navigate replace to="/auth" />}
+            <button onClick={home}>button</button>
+        </div>
+    )
 };
+
 export default Homepage;

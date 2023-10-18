@@ -2,6 +2,7 @@ import React, { useState ,useEffect} from 'react';
 import { loginUser,signupUser } from '../../services/auth';
 import './LoginSignup.css';
 import { getCookieValue } from '../../utils/tokenUtils';
+import { Navigate } from 'react-router-dom';
 
 const LoginSignup: React.FC = () => {
     const [userId, setUserId] = useState('');
@@ -34,7 +35,7 @@ const LoginSignup: React.FC = () => {
             const Token=getCookieValue('token');
             console.log(Token);
             console.log("Logged in");
-            // history.push('./home');
+            return (<Navigate replace to="/home" />)
         } else {
             alert("Invalid Credentials");
         }
@@ -44,6 +45,7 @@ const LoginSignup: React.FC = () => {
         const success = await signupUser(userId, email, parseInt(age), password);
         if (success) {
             console.log("Signed Up");
+            return <Navigate replace to="/home" />
         } else {
             alert("User already exists or Invalid credentials");
         }
