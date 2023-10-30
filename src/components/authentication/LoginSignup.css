@@ -5,7 +5,8 @@
 }
 
 body {
-    background-color: rgb(246, 233, 215);
+    background-color: rgb(0, 0, 0);
+    /* background-image: '../../assets/abstract-seamless-black-square-3d-pattern-background-modern-geometric-hexagon-texture-design-eps10-vector.jpg'; */
     display: flex;
     justify-content: center;
     align-items: center;

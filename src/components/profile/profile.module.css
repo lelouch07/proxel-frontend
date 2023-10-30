@@ -1,0 +1,7 @@
+
+.project-form-profile-container {
+    height: 600px;
+    /* Set a fixed height for the container */
+    overflow: auto;
+    /* Enable vertical scrolling when the content overflows */
+}

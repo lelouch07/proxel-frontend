@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { getCookieValue } from '../../utils/tokenUtils';
-
+import ProjectForm from '../ProjectForm/ProjectForm';
+import AddProjectButton from '../ProjectForm/Buttons/createProjectButton';
+import BackToProfileButton from '../ProjectForm/Buttons/backToProfileButton';
+import './profile.module.css'
 const Profile = () => {
     const [user, setUser] = useState({ UserID: '', Email: '', Age: '' });
     const [loading, setLoading] = useState(true);
+    const [showProjectForm, setShowProjectForm] = useState(false); // State to control form visibility
+    const [showCreateProjectButton, setShowCreateProjectButton] = useState(true); // State to control form visibility
+
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -38,17 +45,34 @@ const Profile = () => {
             });
     }, [navigate]); // Include Navigate as a dependency to use it within the effect
 
+
+
+    const handleCreateProject = () => {
+        setShowCreateProjectButton(false);
+        setShowProjectForm(true); // Show the form when the button is clicked
+    }
+    const handleBackToProfile = () => {
+        setShowProjectForm(false);
+        setShowCreateProjectButton(true);
+    }
+
     return (
-        <div>
+        <div style={{ overflowY: 'auto', maxHeight: '100vh' }}>
             {loading ? (
                 <p>Loading user data...</p>
             ) : user ? (
                 <div>
-                    <h2>Hello, {user.UserID}</h2>
-                    <h2>Email, {user.Email}</h2>
-                    <h2>Age, {user.Age}</h2>
-                    {/* <h2>Email, {user.UserID}</h2> */}
-                    {/* Add more user information here */}
+                    {
+                        showProjectForm ? (
+                            <BackToProfileButton onClick={handleBackToProfile} /> // Use the button component
+                        ) : (
+                            showCreateProjectButton && <AddProjectButton onButtonClick={handleCreateProject} />
+                        )
+                    }
+                        <div className="project-form-profile-container">
+                            {showProjectForm && <ProjectForm />}
+                            {/* <ProjectForm /> */}
+                        </div>
                 </div>
             ) : (
                 // No user data, redirecting to /auth
@@ -60,3 +84,4 @@ const Profile = () => {
 }
 
 export default Profile;
+

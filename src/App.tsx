@@ -14,6 +14,7 @@ const App: React.FC = () => {
       {/* <link>Authenticate</link> */}
       <Router>
       <Routes>
+        {/* <Route path="/" element={<HomepageComp/>}></Route> */}
         <Route path="/auth" element={LoginSignupComp} />
         <Route path="/home" element={HomepageComp} />
         <Route path="/profile" element={ProfileComp} />

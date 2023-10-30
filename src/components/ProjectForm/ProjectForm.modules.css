@@ -1,0 +1,74 @@
+/* Style for the container */
+.container {
+    display: flex;
+    align-items: flex-start;
+    background-color: #0c0c0c;
+    /* width: 60%; */
+    /* align-content: center; */
+    /* Align items to the top of the container */
+}
+
+/* Style for the left side (your component) */
+.HomepageAnonEditor_featuresCopy-rvRtz {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 30%;
+    /* height: 100%; */
+    /* Adjust the width as needed */
+    background-color: #0c0c0c;
+    /* Add your desired background color */
+    padding: 20px;
+}
+.project-form-container {
+    display: flex;
+    flex-direction: column;
+    /* position: relative; */
+    /* Stack elements vertically */
+    width: 100%;
+    /* height: 100%; */
+    /* Take up full available width */
+}
+
+/* Responsive styling for input fields */
+.project-form-container input,
+.project-form-container textarea {
+    width: 100%;
+    /* Make input fields take up full width */
+    padding: 8px;
+    margin: 4px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style for the right side (other content) */
+.right-side {
+    flex: 1;
+    padding: 20px;
+    color: rgb(255, 255, 255);
+    /* Add any additional styles for the right side here */
+}
+.textarea-container {
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+}
+textarea{
+    background-color: #ffffff;
+    border-radius: 10px;
+    color: #0c0c0c;
+    height: 200px;
+}
+input{
+    border-radius: 10px;
+}
+.gap {
+    margin-top: 40px;
+    /* Adjust the value as needed */
+}
+li{
+    margin-top: 20px;
+    text-decoration: solid;
+    
+    
+}
