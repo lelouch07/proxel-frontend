@@ -7,12 +7,25 @@ import ProjectDescriptionInput from './Description/Description';
 import ProjectTimelineInput from './Timeline/TimelineInput';
 import ProjectDateRangePicker from './Timeline/DateRangePicker';
 import './Buttons/SubmitButton.css'
+import { getCookieValue } from '../../utils/tokenUtils';
+import Profile from '../profile/profile';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
 const ProjectForm: React.FC = () => {
+
+    // const [selectedField, setSelectedField] = useState<string | null>('Project Title');
+    const [formData, setFormData] = useState({
+        projectName: '',
+        domain: '',
+        projectDescription: '',
+        // Add more fields as needed
+    });
+
+    
     const [selectedField, setSelectedField] = useState<string | null>('Project Title');
     const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
-    const [, setSelectedCategory] = useState<string>('');
+    const [selectedCategory, setSelectedCategory] = useState<string>('');
     const [additionalSkills, setAdditionalSkill] = useState<string[]>([]);
     const [Requirements, setRequirements] = useState('');
     const [WorkingModel, setWorkingModel] = useState('');
@@ -20,6 +33,60 @@ const ProjectForm: React.FC = () => {
     const [, setProjectTimeline] = useState([]);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+
+    const navigate = useNavigate();
+
+
+    const handleSubmit = () => {
+        const formDataToSend = {
+            // selectedField,
+            formData,
+            selectedSkills,
+            selectedCategory,
+            additionalSkills,
+            Requirements,
+            WorkingModel,
+            Planning,
+            // projectTimeline,
+            startDate,
+            endDate,
+        };
+        const token = getCookieValue('token');
+        fetch('api/profile/project', {
+
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': token || '',
+            },
+            body: JSON.stringify(formDataToSend),
+        })
+            .then((response) => {
+                if (response.ok) {
+                    navigate('/home')
+                    // return response.json();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .then((data) => {
+                // Handle the response data (if any) here
+                console.log('Form submission successful:', data);
+            })
+            .catch((error) => {
+                // Handle errors here (e.g., display an error message)
+                console.error('Form submission error:', error);
+            });
+        // Add your code to send the data to the backend here
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
 
     // Define functions to handle data updates for Project Timeline
     const handleProjectTimelineChange = (timelineData) => {
@@ -67,14 +134,17 @@ const ProjectForm: React.FC = () => {
             return (
                 <div className="right-side">
                     <label>Name of the Project:</label>
-                    <input type="text" name="projectName" />
+                    <input type="text" name="projectName" value={formData.projectName}
+                        onChange={handleInputChange} />
 
                     <label>Domain:</label>
-                    <input type="text" name="domain" />
+                    <input type="text" name="domain" value={formData.domain}
+                        onChange={handleInputChange} />
 
                     <div className="textarea-container"> {/* Wrap the label and textarea in a container */}
                         <label>Why do you want to do the project:</label>
-                        <textarea name="projectDescription" />
+                        <textarea name="projectDescription" value={formData.projectDescription}
+                            onChange={handleInputChange} />
                     </div>
                 </div>
             );
@@ -210,7 +280,7 @@ const ProjectForm: React.FC = () => {
 
             {renderFormFields()}
             <div className='submit-button-container'>
-            <button className='button pulse'>Submit</button>
+                <button className='button pulse' onClick={handleSubmit}>Submit</button>
 
             </div>
 
