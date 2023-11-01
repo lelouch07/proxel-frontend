@@ -16,7 +16,7 @@ const App: React.FC = () => {
       <Routes>
         {/* <Route path="/" element={<HomepageComp/>}></Route> */}
         <Route path="/auth" element={LoginSignupComp} />
-        <Route path="/home" element={HomepageComp} />
+        <Route path="/" element={HomepageComp} />
         <Route path="/profile" element={ProfileComp} />
         {/* <Route path="/auth" element={LoginSignupComp} /> */}
       </Routes>
