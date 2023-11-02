@@ -8,8 +8,8 @@ import ProjectTimelineInput from './Timeline/TimelineInput';
 import ProjectDateRangePicker from './Timeline/DateRangePicker';
 import './Buttons/SubmitButton.css'
 import { getCookieValue } from '../../utils/tokenUtils';
-import Profile from '../profile/profile';
-import { Navigate, useNavigate } from 'react-router-dom';
+// import Profile from '../profile/profile';
+import { useNavigate } from 'react-router-dom';
 
 
 const ProjectForm: React.FC = () => {
@@ -63,7 +63,7 @@ const ProjectForm: React.FC = () => {
         })
             .then((response) => {
                 if (response.ok) {
-                    navigate('/home')
+                    navigate('/')
                     // return response.json();
                 } else {
                     throw new Error('Form submission failed');
@@ -237,7 +237,7 @@ const ProjectForm: React.FC = () => {
     };
 
     return (
-        <div className='container' style={{ position: 'relative' }}>
+        <div className='ProjectForm-container' style={{ position: 'relative' }}>
             <ul className="HomepageAnonEditor_featuresCopy-rvRtz">
                 <li onClick={() => handleFieldClick('Project Title')}>
                     <details open={selectedField === 'Project Title'}>

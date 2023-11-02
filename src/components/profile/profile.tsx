@@ -6,7 +6,7 @@ import ProjectForm from '../ProjectForm/ProjectForm';
 import BackToProfileButton from '../ProjectForm/Buttons/backToProfileButton';
 import Navbar from './Navbar/navbar'; // Import the Navbar component
 import './profile.module.css';
-import ProfilePageContent from './Content/ProfilePageContent';
+import ProfilePageContent from './Content/profilePageContent';
 
 
 const Profile = () => {
@@ -58,16 +58,16 @@ const Profile = () => {
         <div style={{ overflowY: 'auto', maxHeight: '100vh' }}>
             {loading ? (
                 <p>Loading user data...</p>
-                ) : user ? (
-                    <div >
+            ) : user ? (
+                <div >
                     <div className='navbar'>
-                            {!showProjectForm && <Navbar handleCreateProject={handleCreateProject} />} {/* Include the Navbar component */}
+                        {!showProjectForm && <Navbar handleCreateProject={handleCreateProject} />} {/* Include the Navbar component */}
                     </div>
                     {showProjectForm ? (
                         <BackToProfileButton onClick={handleBackToProfile} />
                     ) : (
-                            <ProfilePageContent/>
-                        )
+                        <ProfilePageContent />
+                    )
                     }
                     <div className="project-form-profile-container" >
                         {showProjectForm && <ProjectForm />}

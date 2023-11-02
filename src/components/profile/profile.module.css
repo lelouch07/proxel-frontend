@@ -4,16 +4,22 @@
     /* Set a fixed height for the container */
     overflow: auto;
     padding: 20px;
+    justify-content: center;
+    align-items: center;
     /* Enable vertical scrolling when the content overflows */
 }
 
 /* profile.module.css */
 /* Add this CSS to position the Navbar at the top */
+.profilePage{
+    background-color:rgb(255, 255, 255);
+    color: black;
+}
 
 .navbar {
     display: flex;
     justify-content: space-between;
-    background-color: #333;
+    background-color: #ffffff;
     padding: 10px;
     align-items: center;
     position: fixed;

@@ -69,8 +69,10 @@
     }
 }
 .submit-button-container {
+    /* margin-top: 100px; */
     position: absolute;
     bottom: 10px;
+    bottom: 0px;
     /* Adjust the desired distance from the bottom */
     right: 10px;
     /* Adjust the desired distance from the right */
