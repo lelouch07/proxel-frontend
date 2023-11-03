@@ -1,25 +1,23 @@
-import React, { useState } from "react";
-import './Homepage.css';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext, useAuth } from '../../context/authContext'; // Import your AuthContext
+import './Homepage.css'
+import HomeNavBar from './HomeNavBar/homeNavBar';
+import Categories from './Categories/categories';
+// import {ReactComponent as MessageLogo} from '../../assets/211786_paperplane_icon.svg';
+const Home: React.FC = () => {
+   
 
-const Homepage: React.FC = () => {
-    const [user,setuser] = useState(true);
-    const navigate=useNavigate()
-    console.log("Home Page");
-    const home=()=>{
-        setuser(!user);
-    }
-    const profile=()=>{
-        navigate('/profile')
-    }
     return (
-        <div>
-            <h1>Home Page</h1>
-            {user ? null : <Navigate replace to="/auth" />}
-            <button onClick={home} >Log In</button>
-            <button onClick={profile} >profile</button>
+    <div className='homepagecontainer'>
+        <HomeNavBar/>
+        <div className='below-Navbar'>
+            <div className='categories-container'>
+                <Categories/>
+            </div>
         </div>
-    )
+    </div>
+    );
 };
 
-export default Homepage;
+export default Home;

@@ -2,16 +2,19 @@ import React from 'react';
 import './navbar.css'
 import { useNavigate } from 'react-router-dom';
 import { removeCookie } from '../../../utils/tokenUtils';
+import { useAuth } from '../../../context/authContext';
 interface NavbarProps {
     handleCreateProject: () => void;
 }
 const Navbar: React.FC<NavbarProps> = ({ handleCreateProject }) => {
     const navigate=useNavigate();
+    const{logout}=useAuth();
     const Home=()=>{
         navigate('/');
     }
     const Logout=()=>{
         removeCookie('token');
+        logout();
         navigate('/auth');
     }
     const handleMessages=()=>{

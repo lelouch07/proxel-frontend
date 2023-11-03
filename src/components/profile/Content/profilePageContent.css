@@ -3,8 +3,7 @@
     /* height:auto; */
     margin-top: 49px;
     overflow: hidden;
-    background-color: white;
-    color: #000000;
+    /* color: #000000; */
     /* Prevent overflow issues */
 }
 
@@ -16,7 +15,7 @@ height: 100%;
 }
 .userInfo {
     width: 30%;
-    background-color: hsl(0, 0%, 100%);
+    background-color: #1C2739;
     padding: 5px;
     /* border: 1px solid #ccc; */
     margin: 5px;

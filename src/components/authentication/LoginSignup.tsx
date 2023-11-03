@@ -3,6 +3,12 @@ import { loginUser,signupUser } from '../../services/auth';
 import './LoginSignup.css';
 // import { getCookieValue } from '../../utils/tokenUtils';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/authContext';
+type User = {
+    userId: string;
+    // email: string;
+    // age: number;
+};
 
 const LoginSignup: React.FC = () => {
     const [userId, setUserId] = useState('');
@@ -27,25 +33,32 @@ const LoginSignup: React.FC = () => {
             });
         }
     }, []);
-
-    const handleLogin = async () => {
-        const success = await loginUser(userId, password);
-        if (success) {
-            // setLoggedIn(true);
-
-            // const Token=getCookieValue('token');
-            // console.log(Token);
-            console.log("Logged in");
-            navigate('/profile');
-            
-        } else {
-            alert("Invalid Credentials");
-        }
-    };
+        const {login}=useAuth();
+        
+        const handleLogin = async () => {
+            const success = await loginUser(userId, password);
+            if (success) {
+                const user: User = {
+                    userId: userId, // Assign the userId
+                };
+                console.log("Logged in");
+                login(user);
+                navigate('/profile');
+                
+            } else {
+                alert("Invalid Credentials");
+            }
+        };
+        // await handleLogin();
     
     const handleSignup = async () => {
         const success = await signupUser(userId, email, parseInt(age), password);
         if (success) {
+            const user: User = {
+                userId: userId, // Assign the userId
+            };
+            // console.log("Logged in");
+            login(user);
             console.log("Signed Up");
             navigate('/profile');
         } else {
@@ -54,7 +67,9 @@ const LoginSignup: React.FC = () => {
     };
 
     return (
-        <div className="auth-container">
+        <>
+            <button onClick={()=>{navigate('/')}}>back</button>
+            <div className="auth-container">
                 
                 <div>
                         <div className="container" id="container">
@@ -95,7 +110,8 @@ const LoginSignup: React.FC = () => {
                             </div>
                         </div>
                 </div>            
-        </div>
+            </div>
+        </>
     );
 };
 

@@ -1,0 +1,38 @@
+/* ChatList.css */
+.chat-list {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 16px;
+    height: 100%;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.chat-list h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.chat-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.chat-list li {
+    cursor: pointer;
+    padding: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.chat-list li:hover {
+    background-color: #34495e;
+}
+
+.chat-list li.active {
+    background-color: #3498db;
+    font-weight: bold;
+    color: #fff;
+}

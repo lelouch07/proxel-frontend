@@ -18,6 +18,7 @@ const Profile = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        
         const token = getCookieValue('token');
         const headers = {
             'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './userInfor.module.css'
 const UserInfo = () => {
     return (
         <div className="user-info">
